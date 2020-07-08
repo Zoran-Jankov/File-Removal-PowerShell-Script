@@ -8,7 +8,7 @@ folders are written by user in '.\Target Folders.txt' file. User can enter parti
 "*.dat". Script generates detailed log file, '.\File Deletion Log.log', and report that is sent via email to system administrators.
 
 .NOTES
-	Version:        1.0
+	Version:        1.1
 	Author:         Zoran Jankov
 	Creation Date:  07.07.2020.
 #>
@@ -21,7 +21,7 @@ $ErrorActionPreference = "SilentlyContinue"
 #Defining log files
 $logfile = '.\File Deletion Log.log'
 New-Item -Path '.\Report.log' -ItemType File
-$report = '.\Report.txt'
+$report = '.\Report.log'
 
 #Defining log title
 $logTitle = "=============================== File Deletion PowerShell Script Log ================================"
@@ -50,17 +50,17 @@ $body = "This is an automated message sent from PowerShell script. File Deletion
 Writes a log entry
 
 .DESCRIPTION
-Creates a log entry with timestamp and message passed thru a parameter $Massage, and saves the log entry to log file
-".\File Deletion Log.log". Timestamp is not written if $Message parameter is defined $logSeparator or a.
+Creates a log entry with timestamp and message passed thru a parameter $Message, and saves the log entry to log file
+".\File Deletion Log.log". Timestamp is not written if $Message parameter is defined $logSeparator or a $logTitle.
 
 .PARAMETER Message
 String value to be writen in the log file alongside timestamp
 
 .EXAMPLE
-Write-Log -Message "File sorting started"
+Write-Log -Message "Successfully deleted"
 
 .NOTES
-Format of the timestamp is "yyyy.MM.dd. HH:mm:ss:fff" and this function adds " - " after timestamp and before the main massage.
+Format of the timestamp is "yyyy.MM.dd. HH:mm:ss:fff" and this function adds " - " after timestamp and before the main message.
 #>
 function Write-Log
 {
@@ -106,8 +106,8 @@ function Remove-FilesInFolder
 {
     param([string]$Path)
 
-    $massage = "Attempting to delete files in " + $Path + " folder"
-    Write-Log -Message $massage
+    $message = "Attempting to delete files in " + $Path + " folder"
+    Write-Log -Message $message
 
     foreach($fileName in $fileNames)
     {
@@ -116,8 +116,8 @@ function Remove-FilesInFolder
         Remove-Files -FileList $fileList
     }
 
-    $massage = "Successfully finished file deletion in " + $Path + " folder"
-    Write-Log -Message $massage
+    $message = "Successfully finished file deletion in " + $Path + " folder"
+    Write-Log -Message $message
 }
 
 function Remove-Files
@@ -126,19 +126,19 @@ function Remove-Files
 
     foreach($file in $FileList)
     {
-        $massage = "Attempting to delete " + $file.Name + " file"
-        Write-Log -Message $massage
+        $message = "Attempting to delete " + $file.Name + " file"
+        Write-Log -Message $message
         Remove-Item -Path $file.FullName
 
         if((Test-Path -Path $file.FullName) -eq $true)
         {
-            $massage = "Failed to delete " + $file.Name + " file"
-			Write-Log -Message $massage
+            $message = "Failed to delete " + $file.Name + " file"
+			Write-Log -Message $message
         }
         else
         {
-            $massage = "Successfully deleted " + $file.Name + " file"
-		    Write-Log -Message $massage
+            $message = "Successfully deleted " + $file.Name + " file"
+		    Write-Log -Message $message
         }
     }
 }
@@ -151,19 +151,19 @@ Write-Log -Message "Started file deletion"
 
 foreach($folderPath in $folderPaths)
 {
-    $massage = "Attempting to access " + $folderPath + " folder"
-    Write-Log -Message $massage
+    $message = "Attempting to access " + $folderPath + " folder"
+    Write-Log -Message $message
 
     if((Test-Path -Path $folderPath) -eq $true)
     {
-        $massage = "Successfully accessed " + $folderPath + " folder"
-        Write-Log -Message $massage
+        $message = "Successfully accessed " + $folderPath + " folder"
+        Write-Log -Message $message
         Remove-FilesInFolder -Path $folderPath
     }
     else
     {
-        $massage = "Failed to access " + $folderPath + " folder. It does not exist"
-        Write-Log -Message $massage
+        $message = "Failed to access " + $folderPath + " folder - does not exist"
+        Write-Log -Message $message
     }
 }
 
