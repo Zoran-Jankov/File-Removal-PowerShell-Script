@@ -68,8 +68,8 @@ function Write-Log
 
 	if(($Message -eq $logSeparator) -or ($Message -eq $logTitle))
 	{
-		Add-content -Path $logfile -Value $$Message
-		Add-content -Path $report -Value $$Message
+		Add-content -Path $logfile -Value $Message
+		Add-content -Path $report -Value $Message
 		Write-Output - $Message
 	}
 	else
@@ -167,7 +167,7 @@ foreach($folderPath in $folderPaths)
     }
 }
 
-Write-Log -Message "Successfully finished -File Deletion- PowerShell script"
+Write-Log -Message "Successfully completed -File Deletion- PowerShell Script"
 Write-Log -Message $logSeparator
 
 #Sends email with detailed report and deletes temporary ".\Report.txt" file
