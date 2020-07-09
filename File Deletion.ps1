@@ -183,20 +183,21 @@ function Remove-Files
     foreach($file in $FileList)
     {       
         $fileSize  = (Get-Item -Path $file.FullName).Length
-        
+        Write-Log -Message $fileSize
+        $spaceFreed = Format-FileSize -Size $fileSize
         Remove-Item -Path $file.FullName
 
         if((Test-Path -Path $file.FullName) -eq $true)
         {
-            $totalFailedDeletionsCounter = $totalFailedDeletionsCounter + 1
+            $totalFailedDeletionsCounter ++
             $message = "Failed to delete " + $file.Name + " file"
 			Write-Log -Message $message
         }
         else
         {
-            $totalSuccessfulDeletionsCounter = $totalSuccessfulDeletionsCounter + 1
+            $totalSuccessfulDeletionsCounter ++
             $totalDeletedContent += $fileSize
-            $spaceFreed = Format-FileSize - $fileSize
+            
             $message = "Successfully deleted " + $file.Name + " file - removed " + $spaceFreed
 		    Write-Log -Message $message
         }
@@ -235,7 +236,9 @@ if($totalFailedDeletionsCounter -gt 0)
 
 if($totalSuccessfulDeletionsCounter -gt 0)
 {
-    $message = "Successfully deleted " + $totalSuccessfulDeletionsCounter + " files - removed " + $totalDeletedContent
+    $spaceFreed = Format-FileSize -Size $totalDeletedContent
+
+    $message = "Successfully deleted " + $totalSuccessfulDeletionsCounter + " files - removed " + $spaceFreed
     Write-Log -Message $message
 }
 
