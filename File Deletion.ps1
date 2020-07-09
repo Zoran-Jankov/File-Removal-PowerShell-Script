@@ -18,6 +18,11 @@ folders are written by user in '.\Target Folders.txt' file. User can enter parti
 #Set error action to silently continue
 $ErrorActionPreference = "SilentlyContinue"
 
+#File counters
+$totalSuccessfulDeletionsCounter = 0
+$totalFailedDeletionsCounter = 0
+$totalDeletedContent = 0
+
 #Defining log files
 $logfile = '.\File Deletion Log.log'
 New-Item -Path '.\Report.log' -ItemType File
@@ -102,9 +107,42 @@ function Send-Report
 	Remove-Item -Path $report
 }
 
+function Format-FileSize()
+{
+    Param([int]$Size)
+
+    If($Size -gt 1TB)
+    {
+        [string]::Format("{0:0.00} TB", $Size / 1TB)
+    }
+    elseIf($Size -gt 1GB)
+    {
+        [string]::Format("{0:0.00} GB", $Size / 1GB)
+    }
+    elseIf($Size -gt 1MB)
+    {
+        [string]::Format("{0:0.00} MB", $Size / 1MB)
+    }
+    elseIf($Size -gt 1KB)
+    {
+        [string]::Format("{0:0.00} kB", $Size / 1KB)
+    }
+    elseIf($Size -gt 0)
+    {
+        [string]::Format("{0:0.00} B", $Size)
+    }
+    else
+    {
+        ""
+    }
+}
+
 function Remove-FilesInFolder
 {
     param([string]$Path)
+    
+    $currentSuccessfulDeletionsCounter = $totalSuccessfulDeletionsCounter
+    $currentFailedDeletionsCounter = $totalFailedDeletionsCounter
 
     $message = "Attempting to delete files in " + $Path + " folder"
     Write-Log -Message $message
@@ -116,28 +154,48 @@ function Remove-FilesInFolder
         Remove-Files -FileList $fileList
     }
 
-    $message = "Successfully finished file deletion in " + $Path + " folder"
-    Write-Log -Message $message
+    $successfulDeletions = $totalSuccessfulDeletionsCounter - $currentSuccessfulDeletionsCounter
+    $failedDeletions = $totalFailedDeletionsCounter - $currentFailedDeletionsCounter
+
+    if($failedDeletions -gt 0)
+    {
+        $message = "Failed to delete " + $failedDeletions + " files in " + $Path + " folder"
+        Write-Log -Message $message
+    }
+
+    if($successfulDeletions -gt 0)
+    {
+        $message = "Successfully deleted " + $successfulDeletions + " files in " + $Path + " folder"
+        Write-Log -Message $message
+    }
+    else
+    {
+        $message = "Failed to delete any file in " + $Path + " folder"
+        Write-Log -Message $message
+    }
 }
 
 function Remove-Files
 {
     param($FileList)
-
     foreach($file in $FileList)
-    {
-        $message = "Attempting to delete " + $file.Name + " file"
-        Write-Log -Message $message
+    {       
+        $fileSize  = (Get-Item -Path $file.FullName).Length
+        
         Remove-Item -Path $file.FullName
 
         if((Test-Path -Path $file.FullName) -eq $true)
         {
+            $totalFailedDeletionsCounter++
             $message = "Failed to delete " + $file.Name + " file"
 			Write-Log -Message $message
         }
         else
         {
-            $message = "Successfully deleted " + $file.Name + " file"
+            $totalSuccessfulDeletionsCounter++
+            $totalDeletedContent += $fileSize
+            $spaceFreed = Format-FileSize($fileSize)
+            $message = "Successfully deleted " + $file.Name + " file - removed " + $spaceFreed
 		    Write-Log -Message $message
         }
     }
@@ -167,8 +225,32 @@ foreach($folderPath in $folderPaths)
     }
 }
 
-Write-Log -Message "Successfully completed -File Deletion- PowerShell Script"
+if($totalFailedDeletionsCounter -gt 0)
+{
+    $message = "Failed to delete " + $totalFailedDeletionsCounter + " files"
+    Write-Log -Message $message
+}
+
+if($totalSuccessfulDeletionsCounter -gt 0)
+{
+    $message = "Successfully deleted " + $totalSuccessfulDeletionsCounter + " files - removed " + $totalDeletedContent
+    Write-Log -Message $message
+}
+
+if(($totalSuccessfulDeletionsCounter -gt 0) -and ($totalFailedDeletionsCounter -eq 0))
+{
+    Write-Log -Message "Successfully completed - File Deletion PowerShell Script"
+}
+elseif(($totalSuccessfulDeletionsCounter -gt 0) -and $totalFailedDeletionsCounter -gt 0)
+{
+    Write-Log -Message "Successfully completed with some failed delitions - File Deletion PowerShell Script"
+}
+else
+{
+    Write-Log -Message "Failed to delete any file - File Deletion PowerShell Script"
+}
+
 Write-Log -Message $logSeparator
 
-#Sends email with detailed report and deletes temporary ".\Report.txt" file
+#Sends email with detailed report and deletes temporary ".\Report.log" file
 Send-Report
