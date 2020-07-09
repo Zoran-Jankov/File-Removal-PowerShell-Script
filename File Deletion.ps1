@@ -107,34 +107,36 @@ function Send-Report
 	Remove-Item -Path $report
 }
 
-function Format-FileSize()
+function Format-FileSize
 {
-    Param([int]$Size)
+    param($Size)
 
     If($Size -gt 1TB)
     {
-        [string]::Format("{0:0.00} TB", $Size / 1TB)
+        $stringValue = [string]::Format("{0:0.00} TB", $Size / 1TB)
     }
     elseIf($Size -gt 1GB)
     {
-        [string]::Format("{0:0.00} GB", $Size / 1GB)
+        $stringValue = [string]::Format("{0:0.00} GB", $Size / 1GB)
     }
     elseIf($Size -gt 1MB)
     {
-        [string]::Format("{0:0.00} MB", $Size / 1MB)
+        $stringValue = [string]::Format("{0:0.00} MB", $Size / 1MB)
     }
     elseIf($Size -gt 1KB)
     {
-        [string]::Format("{0:0.00} kB", $Size / 1KB)
+        $stringValue = [string]::Format("{0:0.00} kB", $Size / 1KB)
     }
     elseIf($Size -gt 0)
     {
-        [string]::Format("{0:0.00} B", $Size)
+        $stringValue = [string]::Format("{0:0.00} B", $Size)
     }
     else
     {
-        ""
+        $stringValue = ""
     }
+
+    return $stringValue
 }
 
 function Remove-FilesInFolder
@@ -186,15 +188,15 @@ function Remove-Files
 
         if((Test-Path -Path $file.FullName) -eq $true)
         {
-            $totalFailedDeletionsCounter++
+            $totalFailedDeletionsCounter = $totalFailedDeletionsCounter + 1
             $message = "Failed to delete " + $file.Name + " file"
 			Write-Log -Message $message
         }
         else
         {
-            $totalSuccessfulDeletionsCounter++
+            $totalSuccessfulDeletionsCounter = $totalSuccessfulDeletionsCounter + 1
             $totalDeletedContent += $fileSize
-            $spaceFreed = Format-FileSize($fileSize)
+            $spaceFreed = Format-FileSize - $fileSize
             $message = "Successfully deleted " + $file.Name + " file - removed " + $spaceFreed
 		    Write-Log -Message $message
         }
