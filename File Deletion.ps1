@@ -8,7 +8,7 @@ folders are written by user in '.\Target Folders.txt' file. User can enter parti
 "*.dat". Script generates detailed log file, '.\File Deletion Log.log', and report that is sent via email to system administrators.
 
 .NOTES
-	Version:        1.1
+	Version:        1.2
 	Author:         Zoran Jankov
 	Creation Date:  07.07.2020.
 #>
@@ -19,9 +19,9 @@ folders are written by user in '.\Target Folders.txt' file. User can enter parti
 $ErrorActionPreference = "SilentlyContinue"
 
 #File counters
-$totalSuccessfulDeletionsCounter = 0
-$totalFailedDeletionsCounter = 0
-$totalDeletedContent = 0
+$global:totalSuccessfulDeletionsCounter = 0
+$global:totalFailedDeletionsCounter = 0
+$global:totalDeletedContent = 0
 
 #Defining log files
 $logfile = '.\File Deletion Log.log'
@@ -143,8 +143,8 @@ function Remove-FilesInFolder
 {
     param([string]$Path)
     
-    $currentSuccessfulDeletionsCounter = $totalSuccessfulDeletionsCounter
-    $currentFailedDeletionsCounter = $totalFailedDeletionsCounter
+    $currentSuccessfulDeletionsCounter = $global:totalSuccessfulDeletionsCounter
+    $currentFailedDeletionsCounter = $global:totalFailedDeletionsCounter
 
     $message = "Attempting to delete files in " + $Path + " folder"
     Write-Log -Message $message
@@ -156,8 +156,8 @@ function Remove-FilesInFolder
         Remove-Files -FileList $fileList
     }
 
-    $successfulDeletions = $totalSuccessfulDeletionsCounter - $currentSuccessfulDeletionsCounter
-    $failedDeletions = $totalFailedDeletionsCounter - $currentFailedDeletionsCounter
+    $successfulDeletions = $global:totalSuccessfulDeletionsCounter - $currentSuccessfulDeletionsCounter
+    $failedDeletions = $global:totalFailedDeletionsCounter - $currentFailedDeletionsCounter
 
     if($failedDeletions -gt 0)
     {
@@ -183,20 +183,19 @@ function Remove-Files
     foreach($file in $FileList)
     {       
         $fileSize  = (Get-Item -Path $file.FullName).Length
-        Write-Log -Message $fileSize
         $spaceFreed = Format-FileSize -Size $fileSize
         Remove-Item -Path $file.FullName
 
         if((Test-Path -Path $file.FullName) -eq $true)
         {
-            $totalFailedDeletionsCounter ++
+            $global:totalFailedDeletionsCounter ++
             $message = "Failed to delete " + $file.Name + " file"
 			Write-Log -Message $message
         }
         else
         {
-            $totalSuccessfulDeletionsCounter ++
-            $totalDeletedContent += $fileSize
+            $global:totalSuccessfulDeletionsCounter ++
+            $global:totalDeletedContent += $fileSize
             
             $message = "Successfully deleted " + $file.Name + " file - removed " + $spaceFreed
 		    Write-Log -Message $message
@@ -228,25 +227,25 @@ foreach($folderPath in $folderPaths)
     }
 }
 
-if($totalFailedDeletionsCounter -gt 0)
+if($global:totalFailedDeletionsCounter -gt 0)
 {
-    $message = "Failed to delete " + $totalFailedDeletionsCounter + " files"
+    $message = "Failed to delete " + $global:totalFailedDeletionsCounter + " files"
     Write-Log -Message $message
 }
 
-if($totalSuccessfulDeletionsCounter -gt 0)
+if($global:totalSuccessfulDeletionsCounter -gt 0)
 {
-    $spaceFreed = Format-FileSize -Size $totalDeletedContent
+    $spaceFreed = Format-FileSize -Size $global:totalDeletedContent
 
-    $message = "Successfully deleted " + $totalSuccessfulDeletionsCounter + " files - removed " + $spaceFreed
+    $message = "Successfully deleted " + $global:totalSuccessfulDeletionsCounter + " files - removed " + $spaceFreed
     Write-Log -Message $message
 }
 
-if(($totalSuccessfulDeletionsCounter -gt 0) -and ($totalFailedDeletionsCounter -eq 0))
+if(($global:totalSuccessfulDeletionsCounter -gt 0) -and ($global:totalFailedDeletionsCounter -eq 0))
 {
     Write-Log -Message "Successfully completed - File Deletion PowerShell Script"
 }
-elseif(($totalSuccessfulDeletionsCounter -gt 0) -and $totalFailedDeletionsCounter -gt 0)
+elseif(($global:totalSuccessfulDeletionsCounter -gt 0) -and $global:totalFailedDeletionsCounter -gt 0)
 {
     Write-Log -Message "Successfully completed with some failed delitions - File Deletion PowerShell Script"
 }
