@@ -222,7 +222,7 @@ foreach($folderPath in $folderPaths)
     }
     else
     {
-        $message = "Failed to access " + $folderPath + " folder - does not exist"
+        $message = "Failed to access " + $folderPath + " folder - MISSING FOLDER ERROR"
         Write-Log -Message $message
     }
 }
