@@ -28,11 +28,8 @@ $logfile = '.\File Deletion Log.log'
 New-Item -Path '.\Report.log' -ItemType File
 $report = '.\Report.log'
 
-#Defining log title
-$logTitle = "=============================== File Deletion PowerShell Script Log ================================"
-
-#Defining log separator
-$logSeparator = "===================================================================================================="
+#Load script settings
+$settings = Get-Content '.\Settings.cfg' | Select-Object | ConvertFrom-StringData
 
 #Loading files for deletion
 $fileNames = Get-Content -Path '.\File Names.txt'
@@ -40,13 +37,19 @@ $fileNames = Get-Content -Path '.\File Names.txt'
 #Loading target folders for file deletion
 $folderPaths = Get-Content -Path '.\Target Folders.txt'
 
-#Mail settings (enter your on mail settings)
-$smtp = "smtp.mail.com"
-$port = 25
-$receiverEmail = "system.administrators@company.com"
-$senderEmail = "powershell@company.com"
-$subject = "File Deletion Report"
-$body = "This is an automated message sent from PowerShell script. File Deletion script has finished executing."
+#Load mail settings
+$smtp = $settings.SMTP
+$port = $settings.PORT
+$receiverEmail = $settings.RECEIVER
+$senderEmail = $settings.SENDER
+$subject = $settings.SUBJECT
+$body = $settings.BODY
+
+#Defining log title
+$logTitle = "=============================== File Deletion PowerShell Script Log ================================"
+
+#Defining log separator
+$logSeparator = "===================================================================================================="
 
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
 
@@ -74,8 +77,12 @@ function Write-Log
 	if(($Message -eq $logSeparator) -or ($Message -eq $logTitle))
 	{
 		Add-content -Path $logfile -Value $Message
-		Add-content -Path $report -Value $Message
-		Write-Output - $Message
+        Add-content -Path $report -Value $Message
+        if($settings.WRITE_OUTPUT = "true")
+        {
+            Write-Output - $Message
+        }
+		
 	}
 	else
 	{
@@ -83,7 +90,10 @@ function Write-Log
     	$logEntry = $timestamp + " - " + $Message
 		Add-content -Path $logfile -Value $logEntry
 		Add-content -Path $report -Value $logEntry
-		Write-Output - $logEntry
+        if($settings.WRITE_OUTPUT = "true")
+        {
+            Write-Output - $Message
+        }
 	}
 }
 
@@ -96,13 +106,16 @@ This function sends a Report.log file as an attachment to defined email address
 #>
 function Send-Report
 {
-    Send-MailMessage -SmtpServer $smtp `
-                     -Port $port `
-                     -To $receiverEmail `
-                     -From $senderEmail `
-                     -Subject $subject `
-                     -Body $body `
-                     -Attachments $report
+    if($settings.SEND_REPORT = "true")
+    {
+        Send-MailMessage -SmtpServer $smtp `
+                         -Port $port `
+                         -To $receiverEmail `
+                         -From $senderEmail `
+                         -Subject $subject `
+                         -Body $body `
+                         -Attachments $report
+    }
 
 	Remove-Item -Path $report
 }
