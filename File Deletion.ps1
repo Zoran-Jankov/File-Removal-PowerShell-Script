@@ -28,7 +28,7 @@ $logfile = '.\File Deletion Log.log'
 New-Item -Path '.\Report.log' -ItemType File
 $report = '.\Report.log'
 
-#Load script settings
+#Loading script settings
 $settings = Get-Content '.\Settings.cfg' | Select-Object | ConvertFrom-StringData
 
 #Loading files for deletion
@@ -74,7 +74,6 @@ function Write-Log
         {
             Write-Output - $Message
         }
-		
 	}
 	else
 	{
