@@ -99,15 +99,16 @@ This function sends a Report.log file as an attachment to defined email address
 function Send-Report
 {
     param([string]$FinalMessage)
-    
+
     if($settings.SEND_REPORT -eq "true")
     {
+        $body = $settings.BODY + "`n" + $FinalMessage
         Send-MailMessage -SmtpServer $settings.SMTP `
                          -Port $settings.PORT `
                          -To $settings.RECEIVER `
                          -From $settings.SENDER `
                          -Subject $settings.SUBJECT `
-                         -Body $settings.BODY `
+                         -Body $body `
                          -Attachments $report
     }
 
