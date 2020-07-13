@@ -37,14 +37,6 @@ $fileNames = Get-Content -Path '.\File Names.txt'
 #Loading target folders for file deletion
 $folderPaths = Get-Content -Path '.\Target Folders.txt'
 
-#Load mail settings
-$smtp = $settings.SMTP
-$port = $settings.PORT
-$receiverEmail = $settings.RECEIVER
-$senderEmail = $settings.SENDER
-$subject = $settings.SUBJECT
-$body = $settings.BODY
-
 #Defining log title
 $logTitle = "=============================== File Deletion PowerShell Script Log ================================"
 
@@ -78,7 +70,7 @@ function Write-Log
 	{
 		Add-content -Path $logfile -Value $Message
         Add-content -Path $report -Value $Message
-        if($settings.WRITE_OUTPUT = "true")
+        if($settings.WRITE_OUTPUT -eq "true")
         {
             Write-Output - $Message
         }
@@ -90,7 +82,7 @@ function Write-Log
     	$logEntry = $timestamp + " - " + $Message
 		Add-content -Path $logfile -Value $logEntry
 		Add-content -Path $report -Value $logEntry
-        if($settings.WRITE_OUTPUT = "true")
+        if($settings.WRITE_OUTPUT -eq "true")
         {
             Write-Output - $Message
         }
@@ -106,14 +98,16 @@ This function sends a Report.log file as an attachment to defined email address
 #>
 function Send-Report
 {
-    if($settings.SEND_REPORT = "true")
+    param([string]$FinalMessage)
+    
+    if($settings.SEND_REPORT -eq "true")
     {
-        Send-MailMessage -SmtpServer $smtp `
-                         -Port $port `
-                         -To $receiverEmail `
-                         -From $senderEmail `
-                         -Subject $subject `
-                         -Body $body `
+        Send-MailMessage -SmtpServer $settings.SMTP `
+                         -Port $settings.PORT `
+                         -To $settings.RECEIVER `
+                         -From $settings.SENDER `
+                         -Subject $settings.SUBJECT `
+                         -Body $settings.BODY `
                          -Attachments $report
     }
 
@@ -256,18 +250,20 @@ if($global:totalSuccessfulDeletionsCounter -gt 0)
 
 if(($global:totalSuccessfulDeletionsCounter -gt 0) -and ($global:totalFailedDeletionsCounter -eq 0))
 {
-    Write-Log -Message "Successfully completed - File Deletion PowerShell Script"
+    $finalMessage = "Successfully completed - File Deletion PowerShell Script"
 }
 elseif(($global:totalSuccessfulDeletionsCounter -gt 0) -and $global:totalFailedDeletionsCounter -gt 0)
 {
-    Write-Log -Message "Successfully completed with some failed delitions - File Deletion PowerShell Script"
+    $finalMessage = "Successfully completed with some failed delitions - File Deletion PowerShell Script"
 }
 else
 {
-    Write-Log -Message "Failed to delete any file - File Deletion PowerShell Script"
+    $finalMessage = "Failed to delete any file - File Deletion PowerShell Script"
 }
+
+Write-Log -Message $finalMessage
 
 Write-Log -Message $logSeparator
 
 #Sends email with detailed report and deletes temporary ".\Report.log" file
-Send-Report
+Send-Report -FinalMessage $finalMessage
