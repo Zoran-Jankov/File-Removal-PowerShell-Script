@@ -6,6 +6,8 @@ This script deletes defined files from targeted folders.
 This script deletes defined files from targeted folders. File names are written by user in '.\File Names.txt' file, and target
 folders are written by user in '.\Target Folders.txt' file. User can enter partial names of files in '.\File Names.txt' for example
 "*.dat". Script generates detailed log file, '.\File Deletion Log.log', and report that is sent via email to system administrators.
+In '.\Settings.cfg' file are parameters for mail settings, and options to turn on and off output writing and mail report if you
+don't require them.
 
 .NOTES
 	Version:        1.2
@@ -72,7 +74,7 @@ function Write-Log
         Add-content -Path $report -Value $Message
         if($settings.WRITE_OUTPUT -eq "true")
         {
-            Write-Output - $Message
+            Write-Output -InputObject $Message
         }
 	}
 	else
@@ -83,7 +85,7 @@ function Write-Log
 		Add-content -Path $report -Value $logEntry
         if($settings.WRITE_OUTPUT -eq "true")
         {
-            Write-Output - $Message
+            Write-Output-InputObject $Message
         }
 	}
 }
@@ -140,7 +142,7 @@ function Format-FileSize
     }
     else
     {
-        $stringValue = ""
+        $stringValue = "0"
     }
 
     return $stringValue
@@ -187,6 +189,7 @@ function Remove-FilesInFolder
 function Remove-Files
 {
     param($FileList)
+
     foreach($file in $FileList)
     {       
         $fileSize  = (Get-Item -Path $file.FullName).Length
