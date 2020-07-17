@@ -74,7 +74,7 @@ function Write-Log
         Add-content -Path $report -Value $Message
         if($settings.WRITE_OUTPUT -eq "true")
         {
-            Write-Output -InputObject $Message
+            Write-Output $Message
         }
 	}
 	else
@@ -85,7 +85,7 @@ function Write-Log
 		Add-content -Path $report -Value $logEntry
         if($settings.WRITE_OUTPUT -eq "true")
         {
-            Write-Output-InputObject $Message
+            Write-Output $Message
         }
 	}
 }
@@ -265,7 +265,6 @@ else
 }
 
 Write-Log -Message $finalMessage
-
 Write-Log -Message $logSeparator
 
 #Sends email with detailed report and deletes temporary ".\Report.log" file
