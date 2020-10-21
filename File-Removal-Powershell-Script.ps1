@@ -20,6 +20,7 @@ as the user requires them.
 
 #Loading script settings
 $Settings = Get-Content '.\Settings.cfg' | Select-Object | ConvertFrom-StringData
+$Data = Import-Csv -Path '.\Data.csv' -Delimiter ';'
 
 #File counters
 $TotalSuccessfulRemovalsCounter = 0
@@ -285,6 +286,11 @@ function Send-EmailReport {
 
 Write-Log -Message $Settings.LogTitle
 Write-Log -Message $Settings.LogSeparator
+
+$Data | Remove-Files | ForEach-Object {
+    $TotalContentRemoved += $_.FolderSpaceFreed
+    #TODO
+}
 
 if($TotalFailedRemovalsCounter -gt 0)
 {
