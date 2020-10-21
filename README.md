@@ -1,4 +1,4 @@
-# File-Deletion
+# File Removal Powershell Script
 
 ## Description
 
