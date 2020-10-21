@@ -296,25 +296,25 @@ if($TotalSuccessfulRemovalsCounter -gt 0)
 {
     $SpaceFreed = Format-FileSize -Size $TotalContentRemoved
 
-    $message = "Successfully deleted " + $TotalSuccessfulRemovalsCounter + " files - removed " + $SpaceFreed
-    Write-Log -Message $message
+    $Message = "Successfully deleted " + $TotalSuccessfulRemovalsCounter + " files - removed " + $SpaceFreed
+    Write-Log -Message $Message
 }
 
-if(($global:totalSuccessfulDeletionsCounter -gt 0) -and ($global:totalFailedDeletionsCounter -eq 0))
+if(($TotalSuccessfulRemovalsCounter -gt 0) -and ($TotalFailedRemovalsCounter -eq 0))
 {
-    $finalMessage = "Successfully completed - File Deletion PowerShell Script"
+    $FinalMessage = "Successfully completed - File Deletion PowerShell Script"
 }
-elseif(($global:totalSuccessfulDeletionsCounter -gt 0) -and $global:totalFailedDeletionsCounter -gt 0)
+elseif(($TotalSuccessfulRemovalsCounter -gt 0) -and $TotalFailedRemovalsCounter -gt 0)
 {
-    $finalMessage = "Successfully completed with some failed delitions - File Deletion PowerShell Script"
+    $FinalMessage = "Successfully completed with some failed delitions - File Deletion PowerShell Script"
 }
 else
 {
-    $finalMessage = "Failed to delete any file - File Deletion PowerShell Script"
+    $FinalMessage = "Failed to delete any file - File Deletion PowerShell Script"
 }
 
-Write-Log -Message $finalMessage
-Write-Log -Message $logSeparator
+Write-Log -Message $Message
+Write-Log -Message $Settings.LogSeparator
 
 #Sends email with detailed report and deletes temporary ".\Report.log" file
-Send-Report -FinalMessage $finalMessage
+Send-Report -FinalMessage $FinalMessage
