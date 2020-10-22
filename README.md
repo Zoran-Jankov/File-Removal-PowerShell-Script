@@ -13,11 +13,11 @@ This script deletes defined files from targeted folders. Target folders, file na
 
 ### Execution
 
-![](https://raw.githubusercontent.com/Zoran-Jankov/File-Deletion/master/Document%20Resources/PowerShell.png)
+![Execution](https://raw.githubusercontent.com/Zoran-Jankov/File-Deletion/master/Images/PowerShell.png)
 
 ### Report Log
 
-![](https://raw.githubusercontent.com/Zoran-Jankov/File-Deletion/master/Document%20Resources/Report%20Log.png)
+![Report Log](https://raw.githubusercontent.com/Zoran-Jankov/File-Deletion/master/Images/Report%20Log.png)
 
 ## Credits
 
