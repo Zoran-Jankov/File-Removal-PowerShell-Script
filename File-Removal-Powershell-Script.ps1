@@ -10,7 +10,7 @@ In '.\Settings.cfg' file are parameters for mail settings, and options to turn o
 as the user requires them.
 
 .NOTES
-	Version:        2.1
+	Version:        2.2
 	Author:         Zoran Jankov
     Creation Date:  07.07.2020.
     Last Update:    22.10.2020.
@@ -18,8 +18,9 @@ as the user requires them.
 
 #---------------------------------------------------------[Initialisations]--------------------------------------------------------
 
-#Loading script data
+#Loading script data and settings
 $Data = Import-Csv -Path '.\Data.csv' -Delimiter ';'
+$Settings = Get-Content -Path '.\Settings.cfg' | ConvertFrom-StringData
 
 #File counters
 $TotalSuccessfulRemovalsCounter = 0
@@ -35,8 +36,8 @@ Import-Module '.\Modules\Write-Log.psm1'
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
-Write-Log -LogTitle
-Write-Log -LogSeparator
+Write-Log -Message $Settings.LogTitle -NoTimeStamp
+Write-Log -Message $Settings.LogSeparator -NoTimeStamp
 
 $Data | Remove-Files | ForEach-Object {
     $TotalContentRemoved += $_.FolderSpaceFreed
@@ -66,7 +67,7 @@ else {
 }
 
 Write-Log -Message $FinalMessage
-Write-Log -LogSeparator
+Write-Log -Message $Settings.LogSeparator -NoTimeStamp
 
 #Sends email with detailed report and deletes temporary "Report.log" file
 Send-EmailReport -FinalMessage $FinalMessage
