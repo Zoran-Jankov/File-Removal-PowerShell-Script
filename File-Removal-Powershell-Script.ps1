@@ -18,8 +18,7 @@ as the user requires them.
 
 #---------------------------------------------------------[Initialisations]--------------------------------------------------------
 
-#Loading script settings and data
-$Settings = Get-Content '.\Settings.cfg' | ConvertFrom-StringData
+#Loading script data
 $Data = Import-Csv -Path '.\Data.csv' -Delimiter ';'
 
 #File counters
@@ -36,8 +35,8 @@ Import-Module '.\Modules\Write-Log.psm1'
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
-Write-Log -Message $Settings.LogTitle
-Write-Log -Message $Settings.LogSeparator
+Write-Log -LogTitle
+Write-Log -LogSeparator
 
 $Data | Remove-Files | ForEach-Object {
     $TotalContentRemoved += $_.FolderSpaceFreed
@@ -52,23 +51,22 @@ if ($TotalFailedRemovalsCounter -gt 0) {
 
 if ($TotalSuccessfulRemovalsCounter -gt 0) {
     $SpaceFreed = Get-FormattedFileSize -Size $TotalContentRemoved
-
     $Message = "Successfully deleted " + $TotalSuccessfulRemovalsCounter + " files - removed " + $SpaceFreed
     Write-Log -Message $Message
 }
 
 if (($TotalSuccessfulRemovalsCounter -gt 0) -and ($TotalFailedRemovalsCounter -eq 0)) {
-    $FinalMessage = "Successfully completed - File Deletion PowerShell Script"
+    $FinalMessage = "Successfully completed - File Removal PowerShell Script"
 }
 elseif (($TotalSuccessfulRemovalsCounter -gt 0) -and $TotalFailedRemovalsCounter -gt 0) {
-    $FinalMessage = "Successfully completed with some failed delitions - File Deletion PowerShell Script"
+    $FinalMessage = "Successfully completed with some failed delitions - File Removal PowerShell Script"
 }
 else {
-    $FinalMessage = "Failed to delete any file - File Deletion PowerShell Script"
+    $FinalMessage = "Failed to delete any file - File Removal PowerShell Script"
 }
 
-Write-Log -Message $Message
-Write-Log -Message $Settings.LogSeparator
+Write-Log -Message $FinalMessage
+Write-Log -LogSeparator
 
 #Sends email with detailed report and deletes temporary "Report.log" file
 Send-EmailReport -FinalMessage $FinalMessage
