@@ -10,10 +10,8 @@ In '.\Settings.cfg' file are parameters for mail settings, and options to turn o
 as the user requires them.
 
 .NOTES
-	Version:        2.2
-	Author:         Zoran Jankov
-    Creation Date:  07.07.2020.
-    Last Update:    22.10.2020.
+Version:        1.0
+Author:         Zoran Jankov
 #>
 
 #---------------------------------------------------------[Initialisations]--------------------------------------------------------
