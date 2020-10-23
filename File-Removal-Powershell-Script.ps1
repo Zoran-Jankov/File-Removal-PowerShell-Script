@@ -10,7 +10,7 @@ In '.\Settings.cfg' file are parameters for mail settings, and options to turn o
 as the user requires them.
 
 .NOTES
-Version:        1.0
+Version:        1.1
 Author:         Zoran Jankov
 #>
 
@@ -43,14 +43,14 @@ $Data | Remove-Files | ForEach-Object {
     $TotalFailedRemovalsCounter += $_.FailedRemovals
 }
 
-if ($TotalFailedRemovalsCounter -gt 0) {
-    $message = "Failed to delete " + $TotalFailedRemovalsCounter + " files"
-    Write-Log -Message $message
-}
-
 if ($TotalSuccessfulRemovalsCounter -gt 0) {
     $SpaceFreed = Get-FormattedFileSize -Size $TotalContentRemoved
     $Message = "Successfully deleted " + $TotalSuccessfulRemovalsCounter + " files - removed " + $SpaceFreed
+    Write-Log -Message $Message
+}
+
+if ($TotalFailedRemovalsCounter -gt 0) {
+    $Message = "Failed to delete " + $TotalFailedRemovalsCounter + " files"
     Write-Log -Message $Message
 }
 
@@ -68,4 +68,4 @@ Write-Log -Message $FinalMessage
 Write-Log -Message $Settings.LogSeparator -NoTimestamp
 
 #Sends email with detailed report and deletes temporary "Report.log" file
-Send-EmailReport -FinalMessage $FinalMessage
+Send-EmailReport -Settings $Settings -FinalMessage $FinalMessage

@@ -13,9 +13,19 @@ This script deletes defined files from targeted folders. Target folders, file na
 
 ### Execution
 
+File Removal Powershell Script can be run manually or with Task Scheduler.
+
+In `Data.csv` user enters target folders, target files and optinaly number of days to delete files older than that.
+
+File Removal Powershell Script can be configured in `Settings.cfg` file to write output to console, write permanent log and to send email when it is finished running.
+
+Email setting are also configured in `Settings.cfg` file.
+
 ![Execution](https://raw.githubusercontent.com/Zoran-Jankov/File-Deletion/master/Images/PowerShell.png)
 
 ### Report Log
+
+File Removal Powershell Script detailed log file and report, with timestamp of every action, with files names which have been removed and disk space freed.
 
 ![Report Log](https://raw.githubusercontent.com/Zoran-Jankov/File-Deletion/master/Images/Report%20Log.png)
 
