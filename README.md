@@ -25,7 +25,7 @@ Email setting are also configured in `Settings.cfg` file.
 
 ### Report Log
 
-File Removal Powershell Script detailed log file and report, with timestamp of every action, with files names which have been removed and disk space freed.
+File Removal Powershell Script generates detailed log file and report, with timestamp of every action, with files names which have been removed and disk space freed.
 
 ![Report Log](https://raw.githubusercontent.com/Zoran-Jankov/File-Deletion/master/Images/Report%20Log.png)
 
