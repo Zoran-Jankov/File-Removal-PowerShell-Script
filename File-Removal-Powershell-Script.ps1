@@ -36,8 +36,8 @@ Import-Module '.\Modules\Write-Log.psm1'
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
-Write-Log -Message $Settings.LogTitle -NoTimeStamp
-Write-Log -Message $Settings.LogSeparator -NoTimeStamp
+Write-Log -Message $Settings.LogTitle -NoTimestamp
+Write-Log -Message $Settings.LogSeparator -NoTimestamp
 
 $Data | Remove-Files | ForEach-Object {
     $TotalContentRemoved += $_.FolderSpaceFreed
@@ -67,7 +67,7 @@ else {
 }
 
 Write-Log -Message $FinalMessage
-Write-Log -Message $Settings.LogSeparator -NoTimeStamp
+Write-Log -Message $Settings.LogSeparator -NoTimestamp
 
 #Sends email with detailed report and deletes temporary "Report.log" file
 Send-EmailReport -FinalMessage $FinalMessage
