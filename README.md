@@ -19,19 +19,19 @@ Before running *File Removal Powershell Script* user must configure the script s
 
 **Parameters**
 
-- **`LogTitle`** - Define a string to be a title in logs
-- **`LogSeparator`** - Define a string to be a separator in logs for clearer visibility
-- **`WriteTranscript`** - Set to ***true*** if writing transcript to console is wanted
-- **`WriteLog`** - Set to ***true*** if writing a permanent log is wanted
-- **`SendReport`** - Set to ***true*** if sending a report via email log is wanted
-- **`LogFile`** - Relative path to permanent log file
-- **`ReportFile`** - Relative path to report log file
-- **`SmtpServer`** - SMPT server name
-- **`Port`** - SMPT port (*25/465/587*)
-- **`To`** - Email address to send report log to
-- **`From`** - Email address to send report log form
-- **`Subject`** - Subject of the report log email
-- **`Body`** - Body of the report log email
+-   **`LogTitle`** - Define a string to be a title in logs
+-   **`LogSeparator`** - Define a string to be a separator in logs for clearer visibility
+-   **`WriteTranscript`** - Set to ***true*** if writing transcript to console is wanted
+-   **`WriteLog`** - Set to ***true*** if writing a permanent log is wanted
+-   **`SendReport`** - Set to ***true*** if sending a report via email log is wanted
+-   **`LogFile`** - Relative path to permanent log file
+-   **`ReportFile`** - Relative path to report log file
+-   **`SmtpServer`** - SMPT server name
+-   **`Port`** - SMPT port (*25/465/587*)
+-   **`To`** - Email address to send report log to
+-   **`From`** - Email address to send report log form
+-   **`Subject`** - Subject of the report log email
+-   **`Body`** - Body of the report log email
 
 ### Data
 
@@ -42,16 +42,16 @@ In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/b
 |FolderPath|FileName|OlderThen|
 |----------|:------:|--------:|
 
-- **`FolderPath`** - In this column write the full path of the folder in which files are to be deleted.
-  - ***Example:*** *C:\Folder\Folder\Folder*
-- **`FileName`** - In this column write the name of the file which is to be deleted. It can include a wild card character **`*`** so multiple files can be affected.
-  - ***Example:*** * (Delete all files in target folder)
-  - ***Example:*** *Cache.bat* (Delete only the file named "Cache.bat")
-  - ***Example:*** **.bmp* (Delete all files with ".bmp" extension)
-  - ***Example:*** *Backup** (Delete all files with name starting with "Backup")
-- **`OlderThen`** - In this column write the number of days to delete files older than that in integer format
-  - ***Example:*** *180* (Delete all files older than six months)
-  - ***Example:*** *0* (Delete all files regardless of last write time) 
+-   **`FolderPath`** - In this column write the full path of the folder in which files are to be deleted.
+    -   ***Example:*** *C:\Folder\Folder\Folder*
+-   **`FileName`** - In this column write the name of the file which is to be deleted. It can include a wild card character **`*`** so multiple files can be affected.
+    -   ***Example:*** * (Delete all files in target folder)
+    -   ***Example:*** *Cache.bat* (Delete only the file named "Cache.bat")
+    -   ***Example:*** **.bmp* (Delete all files with ".bmp" extension)
+    -   ***Example:*** *Backup** (Delete all files with name starting with "Backup")
+-   **`OlderThen`** - In this column write the number of days to delete files older than that in integer format
+    -   ***Example:*** *180* (Delete all files older than six months)
+    -   ***Example:*** *0* (Delete all files regardless of last write time) 
 
 ### Execution
 
