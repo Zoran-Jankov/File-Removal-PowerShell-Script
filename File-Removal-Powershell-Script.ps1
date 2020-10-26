@@ -10,15 +10,15 @@ In `Settings.cfg` file are parameters for mail settings, and options to turn on 
 as the user requires them.
 
 .NOTES
-Version:        1.1
+Version:        1.2
 Author:         Zoran Jankov
 #>
 
 #---------------------------------------------------------[Initialisations]--------------------------------------------------------
 
 #Loading script data and settings
-$Data = Import-Csv -Path '.\Data.csv' -Delimiter ';'
-$Settings = Get-Content -Path '.\Settings.cfg' | ConvertFrom-StringData
+$Data = Import-Csv -Path "$PSScriptRoot\Data.csv" -Delimiter ';'
+$Settings = Get-Content -Path "$PSScriptRoot\Settings.cfg" | ConvertFrom-StringData
 
 #File counters
 $TotalSuccessfulRemovalsCounter = 0
@@ -27,10 +27,10 @@ $TotalContentRemoved = 0
 
 #-----------------------------------------------------------[Functions]------------------------------------------------------------
 
-Import-Module '.\Modules\Get-FormattedFileSize.psm1'
-Import-Module '.\Modules\Remove-Files.psm1'
-Import-Module '.\Modules\Send-EmailReport.psm1'
-Import-Module '.\Modules\Write-Log.psm1'
+Import-Module "$PSScriptRoot\Modules\Get-FormattedFileSize.psm1"
+Import-Module "$PSScriptRoot\Modules\Remove-Files.psm1"
+Import-Module "$PSScriptRoot\Modules\Send-EmailReport.psm1"
+Import-Module "$PSScriptRoot\Modules\Write-Log.psm1"
 
 #-----------------------------------------------------------[Execution]------------------------------------------------------------
 
