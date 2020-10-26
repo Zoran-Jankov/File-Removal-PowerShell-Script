@@ -7,7 +7,7 @@
 
 ## Description
 
-This script deletes defined files from targeted folders. Target folders, file names and optional number of days files files must be older then are written by user in [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) file. User can enter partial names of files in FileName column with a wildcard, for example `*.dat`. Script generates detailed log file, `Log.log`, and report that is sent via email to system administrators. In [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file are parameters for mail settings, and options to turn on and off output writing, loging, and mail report as the user requires them.
+This script deletes defined files from targeted folders. Target folders, file names and optional number of days files files must be older then are written by user in [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) file. User can enter partial names of files in FileName column with a wildcard, for example `*.dat`. Script generates detailed log file, and report that is sent via email to system administrators. In [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file are parameters for mail settings, and options to turn on and off output writing, loging, and mail report as the user requires them.
 
 ## Usage
 
