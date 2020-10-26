@@ -51,9 +51,7 @@ In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/b
   - ***Example:*** *Backup** (Delete all files with name starting with "Backup")
 - **`OlderThen`** - In this column write the number of days to delete files older than that in integer format
   - ***Example:*** *180* (Delete all files older than six months)
-  - ***Example:*** *0* (Delete all files regardless of last write time)
-  
-  This 
+  - ***Example:*** *0* (Delete all files regardless of last write time) 
 
 ### Execution
 
