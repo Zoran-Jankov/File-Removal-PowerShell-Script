@@ -11,11 +11,11 @@ This script deletes defined files from targeted folders. Target folders, file na
 
 ## Usage
 
-Before running File Removal Powershell Script user must configure the script setings in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file, and the data feeding the script must be entered in [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) file.
+Before running *File Removal Powershell Script* user must configure the script setings in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file, and the data feeding the script must be entered in [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) file.
 
 ### Settings
 
-File Removal Powershell Script can be configured in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file to write output to console, write permanent log and to send email when it is finished running. Email settings, log title and log separator are also configured in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file.
+*File Removal Powershell Script* can be configured in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file to write output to console, write permanent log and to send email when it is finished running. Email settings, log title and log separator are also configured in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file.
 
 **Parameters**
 
@@ -57,13 +57,13 @@ In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/b
 
 ### Execution
 
-File Removal Powershell Script can be run manually or with Task Scheduler.
+*File Removal Powershell Script* can be run manually or with Task Scheduler.
 
 ![Execution](https://raw.githubusercontent.com/Zoran-Jankov/File-Deletion/master/Images/PowerShell.png)
 
 ### Report Log
 
-File Removal Powershell Script generates detailed log file and report, with timestamped log entry of every action and error, with files names which have been removed and disk space freed.
+*File Removal Powershell Script* generates detailed log file and report, with timestamped log entry of every action and error, with files names which have been removed and disk space freed.
 
 ![Report Log](https://raw.githubusercontent.com/Zoran-Jankov/File-Deletion/master/Images/Report%20Log.png)
 
