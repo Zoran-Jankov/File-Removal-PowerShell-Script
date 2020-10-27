@@ -17,7 +17,7 @@ Before running *File Removal Powershell Script* user must configure the script s
 
 *File Removal Powershell Script* can be configured in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file to write output to console, write permanent log and to send email when it is finished running. Email settings, log title and log separator are also configured in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file.
 
-**Parameters**
+#### Parameters
 
 -   **`LogTitle`** - Define a string to be a title in logs
 -   **`LogSeparator`** - Define a string to be a separator in logs for clearer visibility
@@ -37,22 +37,21 @@ Before running *File Removal Powershell Script* user must configure the script s
 
 In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) user enters target folders, target files and optinaly number of days to delete files older than that.
 
-**Parameters**
+#### Parameter
 
 |FolderPath|FileName|OlderThen|
 |----------|:------:|--------:|
 
 -   **`FolderPath`** - In this column write the full path of the folder in which files are to be deleted.
-
     -   ***Example:*** *C:\Folder\Folder\Folder*
+    
 -   **`FileName`** - In this column write the name of the file which is to be deleted. It can include a wild card character **`*`** so multiple files can be affected.
-
     -   ***Example:*** * (Delete all files in target folder)
     -   ***Example:*** *Cache.bat* (Delete only the file named "Cache.bat")
     -   ***Example:*** **.bmp* (Delete all files with ".bmp" extension)
     -   ***Example:*** *Backup** (Delete all files with name starting with "Backup")
+    
 -   **`OlderThen`** - In this column write the number of days to delete files older than that in integer format
-
     -   ***Example:*** *180* (Delete all files older than six months)
     -   ***Example:*** *0* (Delete all files regardless of last write time) 
 
