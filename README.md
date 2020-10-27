@@ -59,7 +59,7 @@ In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/b
     -   ***Example:*** *true* (Remove all files even in subfolders of the target folder)
     -   ***Example:*** *false* (No files in subfolders of the target folder will be removed)
 
--   **`Force`** - In this column enter ***true*** if file force removal is required.
+-   **`Force`** - In this column enter ***true*** if force removal of files is required.
     -   ***Example:*** *true* (Force remove all selected files)
     -   ***Example:*** *false* (Selected files will not be removed by force)
 
@@ -81,7 +81,7 @@ All of the data parameters are taken in account while script is calculating whic
 
 ### Author
 
-Script developer: [Zoran Jankov](https://www.linkedin.com/in/zoran-jankov-b1054b196/)
+PowerShell script developer: [Zoran Jankov](https://www.linkedin.com/in/zoran-jankov-b1054b196/)
 
 <a href="https://stackexchange.com/users/12947676"><img src="https://stackexchange.com/users/flair/12947676.png" width="208" height="58" alt="profile for Zoran Jankov on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for Zoran Jankov on Stack Exchange, a network of free, community-driven Q&amp;A sites"></a>
 
