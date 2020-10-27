@@ -59,7 +59,7 @@ In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/b
     -   ***Example:*** *true* (Remove all files even in subfolders of the target folder)
     -   ***Example:*** *false* (No files in subfolders of the target folder will be removed)
 
--   **`Force`** - In this column enter ***true*** if file force removal is required.
+-   **`Force`** - In this column enter ***true*** if force removal of files is required.
     -   ***Example:*** *true* (Force remove all selected files)
     -   ***Example:*** *false* (Selected files will not be removed by force)
 
