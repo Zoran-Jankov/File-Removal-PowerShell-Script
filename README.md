@@ -43,13 +43,16 @@ In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/b
 |----------|:------:|--------:|
 
 -   **`FolderPath`** - In this column write the full path of the folder in which files are to be deleted.
+
     -   ***Example:*** *C:\Folder\Folder\Folder*
 -   **`FileName`** - In this column write the name of the file which is to be deleted. It can include a wild card character **`*`** so multiple files can be affected.
+
     -   ***Example:*** * (Delete all files in target folder)
     -   ***Example:*** *Cache.bat* (Delete only the file named "Cache.bat")
     -   ***Example:*** **.bmp* (Delete all files with ".bmp" extension)
     -   ***Example:*** *Backup** (Delete all files with name starting with "Backup")
 -   **`OlderThen`** - In this column write the number of days to delete files older than that in integer format
+
     -   ***Example:*** *180* (Delete all files older than six months)
     -   ***Example:*** *0* (Delete all files regardless of last write time) 
 
