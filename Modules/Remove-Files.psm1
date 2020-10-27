@@ -72,6 +72,7 @@ function Remove-Files {
         else {
             $FileList = Get-ChildItem -Path $FullPath
         }
+
         $FileList = $FileList | Where-Object {$_.LastWriteTime -lt $DateToDelete}
 
         foreach ($File in $FileList) {
