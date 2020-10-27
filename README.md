@@ -55,9 +55,11 @@ In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/b
     -   ***Example:*** *180* (Delete all files older than six months)
     -   ***Example:*** *0* (Delete all files regardless of last write time) 
 
+This is very convenient because it is possible to target multiple folders with different rulers for file deletion with a single script.
+
 ### Execution
 
-*File Removal Powershell Script* can be run manually or with Task Scheduler.
+*File Removal Powershell Script* can be run manually or with *Task Scheduler*.
 
 ![Execution](https://raw.githubusercontent.com/Zoran-Jankov/File-Deletion/master/Images/PowerShell.png)
 
