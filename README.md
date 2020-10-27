@@ -17,7 +17,7 @@ Before running *File Removal Powershell Script* user must configure the script s
 
 *File Removal Powershell Script* can be configured in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file to write output to console, write permanent log and to send email when it is finished running. Email settings, log title and log separator are also configured in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file.
 
-#### Parameters
+#### Settings parameters
 
 -   **`LogTitle`** - Define a string to be a title in logs
 -   **`LogSeparator`** - Define a string to be a separator in logs for clearer visibility
@@ -37,7 +37,7 @@ Before running *File Removal Powershell Script* user must configure the script s
 
 In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) user enters target folders, target files and optinaly number of days to delete files older than that.
 
-#### Parameters
+#### Data parameters
 
 |FolderPath|FileName|OlderThen|
 |----------|:------:|--------:|
