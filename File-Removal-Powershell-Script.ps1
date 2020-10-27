@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-This script deletes defined files from targeted folders.
+This script removes defined files from targeted folders.
 
 .DESCRIPTION
-This script deletes defined files from targeted folders. Target folders, file names and optional number of days files files must be
+This script removes defined files from targeted folders. Target folders, file names and optional number of days files files must be
 older then are written by user in `Data.csv` file. User can enter partial names of files in FileName column with a wildcard, for
 example `*.dat`. Script generates detailed log file, and report that is sent via email to system administrators.
 In `Settings.cfg` file are parameters for mail settings, and options to turn on and off output writing, loging, and mail report
@@ -45,12 +45,12 @@ $Data | Remove-Files | ForEach-Object {
 
 if ($TotalSuccessfulRemovalsCounter -gt 0) {
     $SpaceFreed = Get-FormattedFileSize -Size $TotalContentRemoved
-    $Message = "Successfully deleted " + $TotalSuccessfulRemovalsCounter + " files - removed " + $SpaceFreed
+    $Message = "Successfully removed " + $TotalSuccessfulRemovalsCounter + " files - removed " + $SpaceFreed
     Write-Log -Message $Message
 }
 
 if ($TotalFailedRemovalsCounter -gt 0) {
-    $Message = "Failed to delete " + $TotalFailedRemovalsCounter + " files"
+    $Message = "Failed to remove " + $TotalFailedRemovalsCounter + " files"
     Write-Log -Message $Message
 }
 
@@ -61,11 +61,11 @@ elseif (($TotalSuccessfulRemovalsCounter -gt 0) -and $TotalFailedRemovalsCounter
     $FinalMessage = "Successfully completed with some failed delitions - File Removal PowerShell Script"
 }
 else {
-    $FinalMessage = "Failed to delete any file - File Removal PowerShell Script"
+    $FinalMessage = "Failed to remove any file - File Removal PowerShell Script"
 }
 
 Write-Log -Message $FinalMessage
 Write-Log -Message $Settings.LogSeparator -NoTimestamp
 
-#Sends email with detailed report and deletes temporary "Report.log" file
+#Sends email with detailed report and removes temporary "Report.log" file
 Send-EmailReport -Settings $Settings -FinalMessage $FinalMessage

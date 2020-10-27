@@ -7,7 +7,7 @@
 
 ## Description
 
-This script deletes defined files from targeted folders. Target folders, file names and optional number of days files files must be older then are written by user in [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) file. User can enter partial names of files in FileName column with a wildcard, for example `*.dat`. Script generates detailed log file, and report that is sent via email to system administrators. In [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file are parameters for mail settings, and options to turn on and off output writing, loging, and mail report as the user requires them.
+This script removes defined files from targeted folders. Target folders, file names and optional number of days files files must be older then are written by user in [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) file. User can enter partial names of files in FileName column with a wildcard, for example `*.dat`. Script generates detailed log file, and report that is sent via email to system administrators. In [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file are parameters for mail settings, and options to turn on and off output writing, loging, and mail report as the user requires them.
 
 ## Usage
 
@@ -35,27 +35,35 @@ Before running *File Removal Powershell Script* user must configure the script s
 
 ### Data
 
-In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) user enters target folders, target files and optinaly number of days to delete files older than that.
+In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) user enters target folders, target files and optinaly number of days to remove files older than that.
 
 #### Data parameters
 
-|FolderPath|FileName|OlderThen|
-|----------|:------:|--------:|
+|FolderPath|FileName|OlderThen|Recurse|Force|
+|----------|:------:|--------:|------:|----:|
 
--   **`FolderPath`** - In this column write the full path of the folder in which files are to be deleted.
+-   **`FolderPath`** - In this column write the full path of the folder in which files are to be removed.
     -   ***Example:*** *C:\Folder\Folder\Folder*
 
--   **`FileName`** - In this column write the name of the file which is to be deleted. It can include a wild card character **`*`** so multiple files can be affected.
-    -   ***Example:*** * (Delete all files in target folder)
-    -   ***Example:*** *Cache.bat* (Delete only the file named "Cache.bat")
-    -   ***Example:*** **.bmp* (Delete all files with ".bmp" extension)
-    -   ***Example:*** *Backup** (Delete all files with name starting with "Backup")
+-   **`FileName`** - In this column write the name of the file which is to be removed. It can include a wild card character **`*`** so multiple files can be affected.
+    -   ***Example:*** * (Remove all files in target folder)
+    -   ***Example:*** *Cache.bat* (Remove only the file named "Cache.bat")
+    -   ***Example:*** **.bmp* (Remove all files with ".bmp" extension)
+    -   ***Example:*** *Backup** (Remove all files with name starting with "Backup")
 
--   **`OlderThen`** - In this column write the number of days to delete files older than that in integer format
-    -   ***Example:*** *180* (Delete all files older than six months)
-    -   ***Example:*** *0* (Delete all files regardless of last write time) 
+-   **`OlderThen`** - In this column write the number of days to remove files older than that in integer format
+    -   ***Example:*** *180* (Remove all files older than six months)
+    -   ***Example:*** *0* (Remove all files regardless of last write time)
 
-This is very convenient because it is possible to target multiple folders with different rulers for file deletion with a single script.
+-   **`Recurse`** - In this column enter ***true*** if file removal in subfolders is required.
+    -   ***Example:*** *true* (Remove all files even in subfolders of the target folder)
+    -   ***Example:*** *false* (No files in subfolders of the target folder will be removed)
+
+-   **`Force`** - In this column enter ***true*** if file force removal is required.
+    -   ***Example:*** *true* (Force remove all selected files)
+    -   ***Example:*** *false* (Selected files will not be removed by force)
+
+All of the data parameters are taken in account while script is calculating which files will be removed. This is very convenient because it is possible to target multiple folders with different rulers for file removal with a single script.
 
 ### Execution
 
