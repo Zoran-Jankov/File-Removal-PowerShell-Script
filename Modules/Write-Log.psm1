@@ -54,8 +54,8 @@ function Write-Log {
             $SendReport      = $Settings.SendReport -eq "true"
         }
         else {
-            $LogFile         = '.\Log.log'
-            $ReportFile      = '.\Report.log'
+            $LogFile         = "$PSScriptRoot\Log.log"
+            $ReportFile      = ".\Report.log"
             $WriteTranscript = $true
             $WriteLog        = $true
             $SendReport      = $false
