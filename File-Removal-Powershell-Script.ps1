@@ -45,7 +45,7 @@ $Data | ForEach-Object -Process {
         $_.OlderThen = [int]$_.OlderThen
     }
     else {
-        $_.OlderThen = [int]0
+        $_.OlderThen = [int]180
     }
 
     if ($_.Recurse -eq "true") {
