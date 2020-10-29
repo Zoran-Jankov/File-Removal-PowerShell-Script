@@ -39,6 +39,30 @@ Import-Module "$PSScriptRoot\Modules\Write-Log.psm1"
 Write-Log -Message $Settings.LogTitle -NoTimestamp
 Write-Log -Message $Settings.LogSeparator -NoTimestamp
 
+#Formating data to fit expected parameters in `Remove-Files` function
+$Data | ForEach-Object -Process {
+    if ($_.OlderThen -match "^\d+$") {
+        $_.OlderThen = [int]$_.OlderThen
+    }
+    else {
+        $_.OlderThen = [int]0
+    }
+
+    if ($_.Recurse -eq "true") {
+        $_.Recurse = $true
+    }
+    else {
+        $_.Recurse = $false
+    }
+
+    if ($_.Force -eq "true") {
+        $_.Force = $true
+    }
+    else {
+        $_.Force = $false
+    }
+}
+
 $Data | Remove-Files | ForEach-Object {
     $TotalContentRemoved += $_.FolderSpaceFreed
     $TotalSuccessfulRemovalsCounter += $_.FilesRemoved
