@@ -53,7 +53,7 @@ In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/b
 
 -   **`OlderThen`** - In this column write the number of days to remove files older than that in integer format
     -   ***Example:*** *180* (Remove all files older than six months)
-    -   ***Example:*** *0* (Remove all files regardless of last write time)
+    -   ***Example:*** *0* (Remove all files regardless of file creation time)
 
 -   **`Recurse`** - In this column enter ***true*** if file removal in subfolders is required.
     -   ***Example:*** *true* (Remove all files even in subfolders of the target folder)
