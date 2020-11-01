@@ -3,7 +3,7 @@
 Returns string value from long integer value representing bytes in [12.45 MB] format.
 
 .DESCRIPTION
-The function takes in a long integer value representing bytes, and Returns string value in [12.45 MB] format.
+The function takes in a long integer value representing bytes, and Returns string value in 12.34 MB format.
 
 .PARAMETER Size
 Long integer representing bytes
