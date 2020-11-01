@@ -11,7 +11,7 @@ This script removes defined files from targeted folders. It is meant to be used 
 
 ## Usage
 
-Before running *File Removal Powershell Script* user must configure the script setings in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file, and the data feeding the script must be entered in [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) file.
+Before running *File Removal Powershell Script* user must configure the script settings in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file, and the data feeding the script must be entered in [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) file.
 
 ### Settings
 
