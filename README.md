@@ -1,4 +1,4 @@
-# File Removal Powershell Script
+# File Removal PowerShell Script
 
 [![made-with-powershell](https://img.shields.io/badge/PowerShell-1f425f?logo=Powershell)](https://microsoft.com/PowerShell)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -11,11 +11,11 @@ This script removes defined files from targeted folders. It is meant to be used 
 
 ## Usage
 
-Before running *File Removal Powershell Script* user must configure the script setings in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file, and the data feeding the script must be entered in [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) file.
+Before running *File Removal PowerShell Script* user must configure the script settings in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file, and the data feeding the script must be entered in [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) file.
 
 ### Settings
 
-*File Removal Powershell Script* can be configured in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file to write output to console, write permanent log and to send email when it is finished running. Email settings, log title and log separator are also configured in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file.
+*File Removal PowerShell Script* can be configured in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file to write output to console, write permanent log and to send email when it is finished running. Email settings, log title and log separator are also configured in [`Settings.cfg`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Settings.cfg) file.
 
 #### Settings parameters
 
@@ -35,7 +35,7 @@ Before running *File Removal Powershell Script* user must configure the script s
 
 ### Data
 
-In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) user enters target folders, target files and optinaly number of days to remove files older than that.
+In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/blob/master/Data.csv) user enters target folders, target files and optionally number of days to remove files older than that.
 
 #### Data parameters
 
@@ -53,7 +53,7 @@ In [`Data.csv`](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/b
 
 -   **`OlderThen`** - In this column write the number of days to remove files older than that in integer format
     -   ***Example:*** *180* (Remove all files older than six months)
-    -   ***Example:*** *0* (Remove all files regardless of last write time)
+    -   ***Example:*** *0* (Remove all files regardless of file creation time)
 
 -   **`Recurse`** - In this column enter ***true*** if file removal in subfolders is required.
     -   ***Example:*** *true* (Remove all files even in subfolders of the target folder)
@@ -67,13 +67,13 @@ All of the data parameters are taken in account while script is calculating whic
 
 ### Execution
 
-*File Removal Powershell Script* can be run manually or with *Task Scheduler*.
+*File Removal PowerShell Script* can be run manually or with *Task Scheduler*.
 
 ![Execution](https://raw.githubusercontent.com/Zoran-Jankov/File-Deletion/master/Images/PowerShell.png)
 
 ### Report Log
 
-*File Removal Powershell Script* generates detailed log file and report, with timestamped log entry of every action and error, with files names which have been removed and disk space freed.
+*File Removal PowerShell Script* generates detailed log file and report, with timestamped log entry of every action and error, with files names which have been removed and disk space freed.
 
 ![Report Log](https://raw.githubusercontent.com/Zoran-Jankov/File-Deletion/master/Images/Report%20Log.png)
 
