@@ -86,7 +86,7 @@ function Remove-Files {
         $FailedRemovals = 0
 
         if (-not (Test-Path -Path $FolderPath)) {
-            Write-Log -Message "ERROR: $FolderPath folder does not exist"
+            Write-Log -Message "ERROR: '$FolderPath' folder does not exist"
             return
         }
 
@@ -108,19 +108,19 @@ function Remove-Files {
             $SpaceFreed = Get-FormattedFileSize -Size $FileSize
 
             if ($Force) {
-                Get-Item -Path $File.FullName | Remove-Item -Force
+                Get-Item -Path $File.FullName | Remove-Item -Force -Confirm:$false
             }
             else {
-                Get-Item -Path $File.FullName | Remove-Item
+                Get-Item -Path $File.FullName | Remove-Item -Confirm:$false
             }
 
             if (-not (Test-Path -Path $File.FullName)) {
-                $Message = "Successfully deleted " + $File.Name + " file - removed $SpaceFreed"
+                $Message = "Successfully deleted '" + $File.Name + "' file - removed $SpaceFreed"
                 $FolderSpaceFreed += $FileSize
                 $FilesRemoved ++
             }
             else {
-                $Message = "Failed to delete " + $File.Name + " file"
+                $Message = "Failed to delete '" + $File.Name + "' file"
                 $FailedRemovals ++
             }
             Write-Log -Message $Message
@@ -129,13 +129,13 @@ function Remove-Files {
         $SpaceFreed = Get-FormattedFileSize -Size $FolderSpaceFreed
 
         if ($FilesRemoved -gt 0) {
-            Write-Log -Message "Successfully deleted $FilesRemoved files in $FolderPath folder, and $SpaceFreed of space was freed"
+            Write-Log -Message "Successfully deleted $FilesRemoved files in '$FolderPath' folder, and $SpaceFreed of space was freed"
         }
         if ($FailedRemovals -gt 0) {
-            Write-Log -Message "Failed to delete $FailedRemovals files in $FolderPath folder"
+            Write-Log -Message "Failed to delete $FailedRemovals files in '$FolderPath' folder"
         }
         if ($FilesRemoved -eq 0 -and $FailedRemovals -eq 0) {
-            Write-Log -Message "No files for delition were found in $FolderPath folder"
+            Write-Log -Message "No files for delition were found in '$FolderPath' folder"
         }
         New-Object -TypeName psobject -Property @{
             FolderSpaceFreed =  $FolderSpaceFreed
