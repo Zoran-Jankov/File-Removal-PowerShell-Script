@@ -93,7 +93,7 @@ function Remove-Files {
         $FullPath = Join-Path -Path $FolderPath -ChildPath $FileName
 
         if ($Recurse) {
-            $FileList = Get-ChildItem -Path $FullPath -Recurse -File
+            $FileList = Get-ChildItem -Path $FullPath -Recurse
         }
         else {
             $FileList = Get-ChildItem -Path $FullPath -File
@@ -106,24 +106,25 @@ function Remove-Files {
         foreach ($File in $FileList) {
             $FileSize  = (Get-Item -Path $File.FullName).Length
             $SpaceFreed = Get-FormattedFileSize -Size $FileSize
-
-            if ($Force) {
-                Get-Item -Path $File.FullName | Remove-Item -Force -Confirm:$false
+            
+            if ((Get-Item -Path $File.FullName) -isnot [System.IO.DirectoryInfo]) {
+                if ($Force) {
+                    $File | Remove-Item -Force -Confirm:$false
+                }
+                else {
+                    $File | Remove-Item -Confirm:$false
+                }
+                if (-not (Test-Path -Path $File.FullName)) {
+                    $Message = "Successfully deleted '" + $File.Name + "' file - removed $SpaceFreed"
+                    $FolderSpaceFreed += $FileSize
+                    $FilesRemoved ++
+                }
+                else {
+                    $Message = "Failed to delete '" + $File.Name + "' file"
+                    $FailedRemovals ++
+                }
+                Write-Log -Message $Message
             }
-            else {
-                Get-Item -Path $File.FullName | Remove-Item -Confirm:$false
-            }
-
-            if (-not (Test-Path -Path $File.FullName)) {
-                $Message = "Successfully deleted '" + $File.Name + "' file - removed $SpaceFreed"
-                $FolderSpaceFreed += $FileSize
-                $FilesRemoved ++
-            }
-            else {
-                $Message = "Failed to delete '" + $File.Name + "' file"
-                $FailedRemovals ++
-            }
-            Write-Log -Message $Message
         }
 
         $SpaceFreed = Get-FormattedFileSize -Size $FolderSpaceFreed
@@ -135,7 +136,7 @@ function Remove-Files {
             Write-Log -Message "Failed to delete $FailedRemovals files in '$FolderPath' folder"
         }
         if ($FilesRemoved -eq 0 -and $FailedRemovals -eq 0) {
-            Write-Log -Message "No files for delition were found in '$FolderPath' folder"
+            Write-Log -Message "No files for removal were found in '$FolderPath' folder"
         }
         New-Object -TypeName psobject -Property @{
             FolderSpaceFreed =  $FolderSpaceFreed

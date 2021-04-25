@@ -86,8 +86,11 @@ if (($TotalSuccessfulRemovalsCounter -gt 0) -and ($TotalFailedRemovalsCounter -e
 elseif (($TotalSuccessfulRemovalsCounter -gt 0) -and $TotalFailedRemovalsCounter -gt 0) {
     $FinalMessage = "Successfully completed with some failed delitions - File Removal PowerShell Script"
 }
-else {
+elseif (($TotalSuccessfulRemovalsCounter -eq 0) -and ($TotalFailedRemovalsCounter -gt 0)) {
     $FinalMessage = "Failed to remove any file - File Removal PowerShell Script"
+}
+else {
+    $FinalMessage = "No files for removal were found - File Removal PowerShell Script"
 }
 
 Write-Log -Message $FinalMessage
