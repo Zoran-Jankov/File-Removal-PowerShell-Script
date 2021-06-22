@@ -31,7 +31,7 @@ Remove-Files "C:\Temp" "Backup*" 7 -Recurse -Force
 Import-Csv -Path '.\Data.csv' -Delimiter ';' | Remove-Files
 
 .NOTES
-Version:        2.0
+Version:        2.1
 Author:         Zoran Jankov
 #>
 function Remove-Files {
@@ -126,18 +126,19 @@ function Remove-Files {
                 Write-Log -Message $Message
             }
         }
-	if ($Recurse) {
-		foreach ($File in $FileList) {
-			if (($File -is [System.IO.DirectoryInfo])) {
+
+	    if ($Recurse) {
+		    foreach ($File in $FileList) {
+			    if (($File -is [System.IO.DirectoryInfo])) {
 	    			if ($Force) {
-                   			$File | Remove-Item -Force -Confirm:$false
-                		}
-                		else {
-                    			$File | Remove-Item -Confirm:$false
-                		}
-	    		}
-		}
-	}
+                   	    $File | Remove-Item -Force -Confirm:$false
+                	}
+                	else {
+                    	$File | Remove-Item -Confirm:$false
+                	}
+	    	    }
+		    }
+	    }
 
         $SpaceFreed = Get-FormattedFileSize -Size $FolderSpaceFreed
 
