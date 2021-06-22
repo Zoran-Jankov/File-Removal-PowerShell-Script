@@ -104,10 +104,10 @@ function Remove-Files {
         $FileList = $FileList | Where-Object {$_.CreationTime -lt $DateToDelete}
 
         foreach ($File in $FileList) {
-            $FileSize  = (Get-Item -Path $File.FullName).Length
+            $FileSize  = $File.Length
             $SpaceFreed = Get-FormattedFileSize -Size $FileSize
             
-            if ((Get-Item -Path $File.FullName) -isnot [System.IO.DirectoryInfo]) {
+            if ($File -isnot [System.IO.DirectoryInfo]) {
                 if ($Force) {
                     $File | Remove-Item -Force -Confirm:$false
                 }
@@ -126,6 +126,18 @@ function Remove-Files {
                 Write-Log -Message $Message
             }
         }
+	if ($Recurse) {
+		foreach ($File in $FileList) {
+			if (($File -is [System.IO.DirectoryInfo])) {
+	    			if ($Force) {
+                   			$File | Remove-Item -Force -Confirm:$false
+                		}
+                		else {
+                    			$File | Remove-Item -Confirm:$false
+                		}
+	    		}
+		}
+	}
 
         $SpaceFreed = Get-FormattedFileSize -Size $FolderSpaceFreed
 
