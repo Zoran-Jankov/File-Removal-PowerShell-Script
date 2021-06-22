@@ -27,7 +27,7 @@ Before running *File Removal PowerShell Script* user must configure the script s
 -   **`LogFile`** - Relative path to permanent log file
 -   **`ReportFile`** - Relative path to report log file
 -   **`SmtpServer`** - SMTP server name
--   **`Port`** - SMPT port (*25/465/587*)
+-   **`Port`** - SMTP port (*25/465/587*)
 -   **`To`** - Email address to send report log to
 -   **`From`** - Email address to send report log form
 -   **`Subject`** - Subject of the report log email
