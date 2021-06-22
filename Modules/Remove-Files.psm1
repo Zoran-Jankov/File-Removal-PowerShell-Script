@@ -136,6 +136,13 @@ function Remove-Files {
                 	else {
                     	$File | Remove-Item -Confirm:$false
                 	}
+                    if (-not (Test-Path -Path $File.FullName)) {
+                        $Message = "Successfully deleted '" + $File.FullName + "' folder"
+                    }
+                    else {
+                        $Message = "Failed to delete '" + $File.FullName + "' folder"
+                    }
+                    Write-Log -Message $Message
 	    	    }
 		    }
 	    }
