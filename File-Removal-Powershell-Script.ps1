@@ -12,7 +12,7 @@ via email. In `Settings.cfg` file parameters are stored for email settings, and 
 and email report as the user requires them.
 
 .NOTES
-Version:        1.2
+Version:        1.3
 Author:         Zoran Jankov
 #>
 
