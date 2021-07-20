@@ -4,7 +4,6 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/2837928634484cfbb27413952c994687)](https://www.codacy.com/gh/Zoran-Jankov/File-Removal-PowerShell-Script/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Zoran-Jankov/File-Removal-PowerShell-Script&amp;utm_campaign=Badge_Grade)
 [![CodeFactor](https://www.codefactor.io/repository/github/zoran-jankov/file-removal-powershell-script/badge)](https://www.codefactor.io/repository/github/zoran-jankov/file-removal-powershell-script)
-[![Github All Releases](https://img.shields.io/github/downloads/Zoran-Jankov/File-Removal-PowerShell-Script/total.svg)](https://github.com/Zoran-Jankov/File-Removal-PowerShell-Script/releases/)
 
 ## Description
 
