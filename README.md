@@ -26,12 +26,12 @@ Before running *File Removal PowerShell Script* user must configure the script s
 -   **`SendReport`** - Set to ***true*** if sending a report via email log is wanted
 -   **`LogFile`** - Relative path to permanent log file
 -   **`ReportFile`** - Relative path to report log file
--   **`SmtpServer`** - SMTP server DNS name or IP address
+-   **`SmtpServer`** - SMTP server [FQDN](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) or IP address
 -   **`Port`** - SMTP port (*25/465/587*)
 -   **`To`** - Email address to send report log to
 -   **`From`** - Email address to send report log form
 -   **`Subject`** - Subject of the report log email
--   **`Body`** - Body of the report log email
+-   **`Body`** - First part of log email body
 
 ### Data
 
@@ -87,10 +87,6 @@ All of the data parameters are taken in account while script is calculating whic
 
 ### Author
 
-Script developer:  [Zoran Jankov](https://www.linkedin.com/in/zoran-jankov-b1054b196/)
+Script developer:  [Zoran Jankov](https://www.linkedin.com/in/zoran-jankov/)
 
 <a href="https://stackexchange.com/users/12947676/zoran-jankov"><img src="https://stackexchange.com/users/flair/12947676.png" width="208" height="58" alt="profile for Zoran Jankov on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for Zoran Jankov on Stack Exchange, a network of free, community-driven Q&amp;A sites" /></a>
-
-### Mentor
-
-PowerShell learning mentor and manager: [Bojan Maksimović](https://www.linkedin.com/in/bojan-maksimovic-44749a3a/)
